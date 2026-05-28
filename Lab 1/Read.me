@@ -1,0 +1,202 @@
+# LAB 1 – Temperature Sensor with Relay Control (Telegram)
+
+## Overview
+
+This project uses an ESP32 with a DHT22 temperature and humidity sensor together with a relay module. The ESP32 reads temperature and humidity data every 5 seconds and sends alerts through Telegram when the temperature rises above a threshold value.
+
+Users can control the relay remotely using Telegram commands such as `/status`, `/on`, and `/off`. When the temperature drops below the threshold again, the relay automatically turns OFF.
+
+This project was developed using MicroPython in Thonny IDE.
+
+---
+
+# Components Used
+
+* ESP32 Dev Board
+* DHT22 Temperature & Humidity Sensor
+* Relay Module
+* Jumper Wires
+* USB Cable
+* WiFi Connection
+* Telegram Bot
+* Thonny IDE
+
+
+
+# Wiring Diagram
+
+| Component  | ESP32 Pin |
+| ---------- | --------- |
+| DHT22 DATA | GPIO16    |
+| Relay IN   | GPIO25    |
+| DHT22 VCC  | 5V        |
+| Relay VCC  | 5V        |
+| GND        | GND       |
+
+
+
+# Task 1 – Sensor Read & Print
+
+The ESP32 reads temperature and humidity data from the DHT22 sensor every 5 seconds and prints the values to the serial monitor.
+
+## Features
+
+* Reads temperature
+* Reads humidity
+* Updates every 5 seconds
+* Handles sensor read errors
+
+
+
+# Task 2 – Telegram Send
+
+The ESP32 connects to Telegram using the Telegram Bot API and sends messages to the Telegram group.
+
+## Features
+
+* Connects ESP32 to WiFi
+* Connects to Telegram Bot
+* Receives Telegram updates
+* Sends test messages
+
+
+
+# Task 3 – Telegram Commands
+
+The Telegram bot supports remote commands for controlling the relay and checking sensor status.
+
+## Commands
+
+### `/status`
+
+Shows:
+
+* Temperature
+* Humidity
+* Relay state
+
+### `/on`
+
+Turns relay ON.
+
+### `/off`
+
+Turns relay OFF.
+
+## Example
+
+
+Temp: 34.00 C
+Humidity: 70.00 %
+Light: ON
+
+
+---
+
+# Task 4 – Alert Logic & Auto OFF
+
+The ESP32 automatically monitors temperature levels and sends Telegram warning messages when the temperature exceeds the threshold.
+
+## Alert Logic
+
+* No alerts are sent when temperature is below the threshold
+* If temperature exceeds the threshold:
+
+  * Telegram sends warning messages every 5 seconds
+* User sends `/on` to activate relay
+* Alerts stop after relay is ON
+* When temperature drops below threshold:
+
+  * Relay automatically turns OFF
+  * Telegram sends an auto-OFF message
+
+## Example Alert
+
+
+ALERT: Temp is 35.00 C
+Above threshold!
+Send /on to turn light ON.
+```
+
+## Example Auto OFF Message
+
+
+Temp dropped below threshold.
+Light auto-OFF.
+
+Demo video link: https://www.youtube.com/shorts/i9Cwtu29MuU
+---
+
+# How to Run the Project
+
+## Step 1 – Flash MicroPython
+
+Install MicroPython firmware on the ESP32 board.
+
+## Step 2 – Open Thonny IDE
+
+Connect the ESP32 to the computer using USB.
+
+## Step 3 – Upload Python Files
+
+Upload the Python files to the ESP32 board.
+
+## Step 4 – Configure WiFi & Telegram
+
+Change these values inside the code:
+
+
+SSID = "YOUR_WIFI_NAME"
+PASSWORD = "YOUR_WIFI_PASSWORD"
+
+BOT_TOKEN = "YOUR_BOT_TOKEN"
+CHAT_ID = "YOUR_CHAT_ID"
+
+
+## Step 5 – Run Program
+
+Run the Python file in Thonny IDE.
+
+---
+
+# Flowchart
+
+START
+  ↓
+Connect WiFi
+  ↓
+Read DHT22 Sensor
+  ↓
+Check Telegram Commands
+  ↓
+Temperature Above Threshold?
+ ├── YES
+ │    ├── Relay OFF → Send Alert
+ │    └── Relay ON → Stop Alerts
+ │
+ └── NO
+      ├── Relay ON → Auto OFF
+      └── Relay OFF → Continue
+  ↓
+Wait 5 Seconds
+  ↓
+Repeat
+
+
+---
+
+# Files Included
+
+* task1.py
+* task2.py
+* task3.py
+* task4.py
+* README.md
+* Screenshots
+* Demo Video
+
+---
+
+# Conclusion
+
+This lab successfully demonstrated an IoT monitoring and automation system using ESP32 and Telegram integration. The ESP32 can monitor temperature, send Telegram alerts, and remotely control a relay in real time. This project combines sensing, networking, and automation into a practical IoT application.
