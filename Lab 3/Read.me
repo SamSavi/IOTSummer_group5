@@ -1,0 +1,227 @@
+# LAB 3 – IoT Smart Gate Control with Blynk, IR Sensor, Servo Motor, and TM1637
+
+
+- **Course:** Internet of Things (IoT)
+- **Lab:** Lab 3 – Smart Gate Control System
+
+---
+
+## Project Overview
+
+This project demonstrates an IoT Smart Gate Control System using an ESP32 microcontroller, Blynk cloud platform, IR obstacle sensor, servo motor, and TM1637 4-digit display.
+
+The system can:
+
+- Detect objects using an IR sensor
+- Automatically open and close a gate using a servo motor
+- Count object detection events
+- Display the count on a TM1637 display
+- Send data to Blynk for remote monitoring
+- Support automatic and manual control modes
+
+---
+
+## Components Used
+
+- ESP32 Development Board
+- IR Obstacle Sensor
+- SG90 Servo Motor
+- TM1637 4-Digit Display
+- Blynk IoT Platform
+- MicroPython
+- Jumper Wires
+- USB Cable
+
+---
+
+## Wiring Connections
+
+### IR Sensor
+
+| IR Sensor | ESP32 |
+|-----------|--------|
+| VCC | 5V |
+| GND | GND |
+| OUT | GPIO12 |
+
+### Servo Motor
+
+| Servo Wire | ESP32 |
+|------------|--------|
+| Red | 5V |
+| Brown | GND |
+| Yellow | GPIO13 |
+
+### TM1637 Display
+
+| TM1637 | ESP32 |
+|---------|--------|
+| VCC | 5V |
+| GND | GND |
+| DIO | GPIO16 |
+| CLK | GPIO17 |
+
+---
+
+## Blynk Configuration
+
+| Virtual Pin | Purpose |
+|-------------|---------|
+| V2 | IR Sensor Status |
+| V3 | Detection Counter |
+| V4 | Servo Control Slider |
+| V5 | Auto/Manual Mode Switch |
+
+### Widgets
+
+#### Value Display (V2)
+Displays IR sensor status.
+
+#### Value Display (V3)
+Displays object detection count.
+
+#### Slider (V4)
+Controls servo angle from 0° to 180°.
+
+#### Switch (V5)
+Controls Automatic and Manual modes.
+
+---
+
+# Task 1 – IR Sensor Reading
+
+### Objective
+Read the IR sensor and display the detection status on Blynk.
+
+### Description
+
+The IR sensor is connected to GPIO12.
+
+- Object detected → Send value 1 to Blynk V2
+- No object detected → Send value 0 to Blynk V2
+
+### Result
+
+The IR sensor status can be monitored remotely through the Blynk application.
+
+---
+
+# Task 2 – Servo Motor Control via Blynk
+
+### Objective
+Control the servo motor using a Blynk slider.
+
+### Description
+
+A slider widget on V4 sends values between 0° and 180°.
+
+The ESP32 reads the slider value and moves the servo motor accordingly.
+
+### Result
+
+The servo motor can be controlled remotely using the Blynk mobile application.
+
+---
+
+# Task 3 – Automatic IR Servo Action
+
+### Objective
+Automatically open the gate when an object is detected.
+
+### Description
+
+When the IR sensor detects an object:
+
+1. Servo rotates to 90°
+2. Gate remains open for 3 seconds
+3. Servo returns to 0°
+4. System waits until the object leaves
+
+### Result
+
+The gate automatically opens and closes without user interaction.
+
+---
+
+# Task 4 – TM1637 Display Integration
+
+### Objective
+Count object detections and display the count.
+
+### Description
+
+Every detection event:
+
+- Increases the counter by 1
+- Updates the TM1637 display
+- Sends the count to Blynk V3
+
+### Result
+
+The detection count is visible both locally and remotely.
+
+---
+
+# Task 5 – Manual Override Mode
+
+### Objective
+Enable or disable automatic gate operation.
+
+### Description
+
+A Blynk switch on V5 controls the system mode.
+
+### Automatic Mode (V5 = 1)
+
+- IR sensor active
+- Gate opens automatically
+- Counter increases
+- Display updates
+
+### Manual Mode (V5 = 0)
+
+- IR sensor ignored
+- Automatic gate control disabled
+
+### Result
+
+Users can switch between automatic and manual operation using Blynk.
+
+---
+
+## How to Run
+
+1. Connect all hardware components.
+2. Upload the Python code to the ESP32.
+3. Configure WiFi credentials.
+4. Configure the Blynk Auth Token.
+5. Open the Blynk application.
+6. Run the program.
+7. Test all five tasks.
+
+---
+
+## Project Structure
+
+```text
+Lab3/
+│
+├── Lab 3 task 1.py
+├── Lab 3 task 2.py
+├── Lab 3 task 3.py
+├── Lab 3 task 4.py
+├── Lab 3 task 5.py
+├── README.md
+├── images/
+│   ├── wiring.jpg
+│   ├── dashboard.jpg
+│   └── tm1637.jpg
+└── video/
+    └── demo.mp4
+```
+
+## Conclusion
+
+This project successfully integrated an ESP32, IR sensor, servo motor, TM1637 display, and Blynk cloud platform into a complete IoT Smart Gate Control System.
+
+The system demonstrates object detection, gate automation, event counting, remote monitoring, and manual override functionality, providing practical experience with IoT system design and implementation.
