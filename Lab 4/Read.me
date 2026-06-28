@@ -1,0 +1,138 @@
+# Multi-Sensor IoT Monitoring System
+
+## Student Information
+
+**Course:** Internet of Things (IoT) Lab
+
+**Project:** Multi-Sensor IoT Monitoring System using ESP32
+
+---
+
+# Project Overview
+
+This project implements a multi-sensor IoT monitoring system using an ESP32 programmed in MicroPython. The system collects data from multiple sensors, processes the data at the edge, and sends the processed information to Node-RED using HTTP.
+
+Node-RED stores the data in InfluxDB, while Grafana displays the sensor readings through a real-time dashboard.
+
+---
+
+# Objectives
+
+The objectives of this project are:
+
+- Read multiple sensors using ESP32
+- Apply moving average filtering to MQ-5 gas sensor readings
+- Classify gas levels into SAFE, WARNING, and DANGER
+- Detect fever using the MLX90614 infrared temperature sensor
+- Read pressure and altitude from BMP280
+- Obtain timestamps using the DS3231 RTC module
+- Send processed data to Node-RED
+- Store data in InfluxDB
+- Visualize data using Grafana
+
+---
+
+# Hardware Components
+
+- ESP32
+- MQ-5 Gas Sensor
+- MLX90614 Infrared Temperature Sensor
+- BMP280 Pressure Sensor
+- DS3231 Real Time Clock (RTC)
+- Wi-Fi Network
+
+---
+
+# Software Used
+
+- MicroPython
+- Thonny IDE
+- Node-RED
+- InfluxDB
+- Grafana
+
+---
+
+# System Workflow
+
+1. ESP32 connects to Wi-Fi.
+2. All sensors are initialized.
+3. MQ-5 gas sensor is read.
+4. The last five gas readings are stored.
+5. Moving average is calculated.
+6. Gas level is classified:
+   - SAFE
+   - WARNING
+   - DANGER
+7. MLX90614 measures body temperature.
+8. Fever detection is performed.
+9. BMP280 measures:
+   - Room Temperature
+   - Pressure
+   - Altitude
+10. DS3231 provides the current timestamp.
+11. All processed data is stored in a JSON packet.
+12. JSON data is sent to Node-RED using HTTP POST.
+13. Node-RED stores the data in InfluxDB.
+14. Grafana displays the data in real time.
+
+---
+
+# Gas Risk Classification
+
+| Gas Average | Risk Level |
+|-------------|------------|
+| < 2100 | SAFE |
+| 2100 – 2599 | WARNING |
+| ≥ 2600 | DANGER |
+
+---
+
+# Fever Detection
+
+If the body temperature is greater than or equal to **32.5°C**, the fever flag is set.
+
+```
+Body Temperature >= 32.5°C
+fever_flag = 1
+
+Otherwise
+
+fever_flag = 0
+```
+
+---
+
+# Data Packet
+
+The ESP32 sends the following JSON data:
+
+```json
+{
+    "gas_avg": 2250,
+    "risk_level": "WARNING",
+    "body_temp": 33.4,
+    "fever_flag": 1,
+    "room_temp": 29.8,
+    "pressure": 1007.5,
+    "altitude": 34.2,
+    "timestamp": "2026-06-28 14:30:12"
+}
+```
+
+---
+
+# Grafana Dashboard
+
+The Grafana dashboard contains the following panels:
+
+1. Gas Average (Time Series)
+2. Risk Level
+3. Body Temperature Gauge
+4. Pressure Graph
+5. Altitude Graph
+6. Pressure (hPa)
+7. Altitude (Meters)
+8. DS3231 Timestamp
+
+---
