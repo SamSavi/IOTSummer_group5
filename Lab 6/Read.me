@@ -1,0 +1,181 @@
+# LAB 6 – Smart RFID Attendance System with Cloud & SD Logging
+
+
+
+- **Course:** Internet of Things (IoT)
+- **Lab:** Lab 6 – Smart RFID System with Cloud & SD Logging
+- **Platform:** ESP32 with MicroPython (Thonny)
+
+---
+
+# Project Overview
+
+This project implements a Smart RFID Attendance System using an ESP32. The system detects RFID cards, identifies registered students, records attendance locally on an SD card, uploads attendance records to Google Firestore, and provides user feedback using a buzzer.
+
+The project demonstrates the integration of multiple IoT modules into one complete attendance system.
+
+---
+
+# Features
+
+- RFID card detection using RC522
+- Student identification using UID matching
+- Automatic date and time generation (NTP)
+- Attendance saved to SD Card (CSV)
+- Attendance uploaded to Google Firestore
+- WiFi connectivity
+- Valid/Invalid card detection
+- Buzzer feedback
+- Unknown card rejection
+
+---
+
+# Hardware Used
+
+- ESP32
+- RFID RC522 Module
+- Micro SD Card Module
+- Micro SD Card
+- Active Buzzer
+- Jumper Wires
+- Breadboard
+
+---
+
+# Software Used
+
+- Thonny IDE
+- MicroPython
+- Google Firestore
+- Google Firebase
+- GitHub
+- YouTube
+
+---
+
+# Project Workflow
+
+1. ESP32 starts.
+2. Connect to WiFi.
+3. Synchronize time using NTP.
+4. Initialize SD Card.
+5. Wait for RFID card.
+6. Read RFID UID.
+7. Compare UID with student database.
+8. If UID is valid:
+   - Activate buzzer for 0.3 seconds
+   - Generate current date and time
+   - Save attendance to SD Card
+   - Upload attendance to Firestore
+9. If UID is invalid:
+   - Activate buzzer for 3 seconds
+   - Display "Unknown Card"
+   - Do not save data
+10. Wait for the next RFID card.
+
+---
+
+# File Structure
+
+```
+Lab6/
+│
+├── main.py
+├── attendance.csv
+├── README.md
+├── Flowchart.png
+└── Firestore Screenshot.png
+```
+
+---
+
+# Student Database Example
+
+| UID | Name | Student ID | Major |
+|------|------|------------|--------|
+| 82-9B-37-06-28 | Kiari | 911676767 | Jungler |
+| 61-A9-B3-17-6C | ACYRA | 992676767 | Mid-Laner |
+
+---
+
+# CSV Format
+
+```
+UID,Name,StudentID,Major,DateTime
+82-9B-37-06-28,Kiari,911676767,Jungler,2026-07-02 12:00:00
+```
+
+---
+
+# Firestore Collection
+
+Collection Name
+
+```
+rfid_logs
+```
+
+Fields
+
+- UID
+- Name
+- StudentID
+- Major
+- DateTime
+
+---
+
+# Flowchart
+
+Include the generated flowchart image in this repository.
+
+Example:
+
+```
+Flowchart.png
+```
+
+---
+
+# Demo Video
+
+Watch the project demonstration here:
+
+https://www.youtube.com/shorts/ASc-NJPP93k
+
+---
+
+# Results
+
+✅ RFID card successfully detected
+
+✅ Student successfully identified
+
+✅ Current date and time generated
+
+✅ Attendance stored in SD Card
+
+✅ Attendance uploaded to Firestore
+
+✅ Invalid cards rejected
+
+✅ Buzzer feedback works correctly
+
+---
+
+# Learning Outcomes
+
+- Interface RFID RC522 with ESP32
+- Read and process RFID UID
+- Manage CSV data storage
+- Upload cloud data using Firestore REST API
+- Implement WiFi communication
+- Integrate multiple IoT peripherals
+- Build a complete cloud-based attendance system
+
+---
+
+
+American University of Phnom Penh (AUPP)
+
+Computer Science
