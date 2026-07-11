@@ -1,0 +1,218 @@
+# Lab 5 – Smart Color Detection & Control with MIT App Inventor
+
+
+**Course:** Internet of Things (IoT)
+
+**Project:** Lab 5 – Smart Color Detection & Control with MIT App Inventor
+
+---
+
+# Project Overview
+
+This project implements a smart color detection and control system using an ESP32 programmed in MicroPython. The system reads colors using the TCS34725 RGB sensor, classifies the detected color, controls a NeoPixel RGB LED ring, adjusts a DC motor speed using PWM, and communicates with a MIT App Inventor mobile application for monitoring and manual control.
+
+---
+
+# Hardware Used
+
+- ESP32
+- TCS34725 RGB Color Sensor
+- NeoPixel Ring (16 LEDs)
+- DC Motor
+- L298N Motor Driver
+- Jumper Wires
+- USB Cable
+- WiFi Network
+
+---
+
+# Software Used
+
+- Thonny IDE
+- MicroPython
+- MIT App Inventor
+- VS Code
+
+---
+
+# System Workflow
+
+1. ESP32 initializes all peripherals.
+2. TCS34725 continuously reads RGB values.
+3. ESP32 classifies the detected color.
+4. NeoPixel changes to the detected color.
+5. Motor speed changes according to the detected color.
+6. The detected color is displayed in the MIT App.
+7. The user can manually control the motor and NeoPixel from the app.
+
+---
+
+# Task 1 – RGB Reading
+
+### Description
+
+Read RGB values from the TCS34725 sensor and display them on the serial monitor.
+
+### Files
+
+- `main.py`
+- `tcs34725.py`
+
+
+
+---
+
+# Task 2 – Color Classification
+
+### Description
+
+Classify the detected object using the following rules:
+
+- R > G and R > B → RED
+- G > R and G > B → GREEN
+- B > R and B > G → BLUE
+
+The detected color is printed to the serial monitor.
+
+### File
+
+- `Lab5_Task2.py`
+
+---
+
+# Task 3 – NeoPixel Control
+
+### Description
+
+The NeoPixel Ring automatically changes color based on the detected object.
+
+| Detected Color | NeoPixel |
+|---------------|----------|
+| RED | Red |
+| GREEN | Green |
+| BLUE | Blue |
+
+### File
+
+- `Lab5_Task3.py`
+
+### Demonstration
+
+https://www.youtube.com/shorts/iLqg9jj12Bg
+
+# Task 4 – Motor PWM Control
+
+### Description
+
+The DC motor speed changes according to the detected color.
+
+| Color | PWM Speed |
+|--------|-----------|
+| RED | 700 |
+| GREEN | 500 |
+| BLUE | 300 |
+
+### File
+
+- `Lab5_Task4.py`
+
+---
+
+# Task 5 – MIT App Integration
+
+### Features
+
+- Display detected color
+- Forward button
+- Backward button
+- Stop button
+- Manual RGB input
+- Manual NeoPixel color control
+
+### File
+
+- `Lab5.py`
+
+### Demonstration
+
+https://www.youtube.com/shorts/PP5HdG73TlY
+
+---
+
+# Pin Connections
+
+## TCS34725
+
+| Sensor | ESP32 |
+|---------|-------|
+| SDA | GPIO21 |
+| SCL | GPIO22 |
+| VCC | 3.3V |
+| GND | GND |
+
+---
+
+## NeoPixel Ring
+
+| NeoPixel | ESP32 |
+|-----------|-------|
+| DIN | GPIO23 |
+| VCC | 5V |
+| GND | GND |
+
+---
+
+## Motor Driver (L298N)
+
+| L298N | ESP32 |
+|--------|-------|
+| ENA | GPIO14 |
+| IN1 | GPIO26 |
+| IN2 | GPIO27 |
+
+---
+
+# Folder Structure
+
+```
+Lab5/
+│
+├── main.py
+├── tcs34725.py
+├── Lab5_Task2.py
+├── Lab5_Task3.py
+├── Lab5_Task4.py
+├── Lab5.py
+├── Flowchart.png
+├── MIT_App.pdf
+└── README.md
+```
+
+---
+
+# Results
+
+- Successfully read RGB values.
+- Successfully classified RED, GREEN, and BLUE objects.
+- Successfully controlled the NeoPixel Ring.
+- Successfully controlled motor speed using PWM.
+- Successfully communicated with the MIT App Inventor application.
+- Successfully implemented manual motor and NeoPixel control through the mobile app.
+
+---
+
+# Demo Videos
+
+### Task 3
+
+https://www.youtube.com/shorts/iLqg9jj12Bg
+
+### Task 5
+
+https://www.youtube.com/shorts/PP5HdG73TlY
+
+---
+
+# Conclusion
+
+This lab demonstrates the integration of multiple hardware components with the ESP32 to create an interactive IoT system. The project combines sensor input, edge processing, LED control, motor control, and mobile application communication into a single smart color detection system.
