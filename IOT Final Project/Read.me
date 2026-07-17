@@ -1,0 +1,293 @@
+# 🔥 Smart Fire & Gas Detection System
+
+A real-time IoT monitoring system that detects dangerous gas levels, activates a local alarm, sends Telegram notifications, streams a live camera feed, and visualizes sensor data using Grafana.
+
+---
+
+ Project Overview
+
+This project uses two ESP32 boards:
+
+- **ESP32 Sensor Node**
+  - Reads the MQ-5 Gas Sensor.
+  - Reads the BMP280 (Temperature, Pressure, Altitude).
+  - Calculates a moving average for gas readings.
+  - Classifies gas levels into SAFE, WARNING, or DANGER.
+  - Activates a buzzer during dangerous gas levels.
+  - Sends data to Node-RED via HTTP.
+  - Sends Telegram alerts when gas reaches the DANGER level.
+
+- **ESP32-CAM**
+  - Runs independently as a live web server.
+  - Provides real-time video streaming.
+  - Camera link is included in Telegram notifications.
+  - Live stream is embedded into the Grafana dashboard.
+
+---
+
+# 🚀 Features
+
+- ✅ Real-time gas monitoring
+- ✅ Moving average filtering (5 samples)
+- ✅ Gas risk classification
+- ✅ Local buzzer alarm
+- ✅ Telegram notifications
+- ✅ Live ESP32-CAM video feed
+- ✅ Node-RED integration
+- ✅ InfluxDB time-series database
+- ✅ Grafana dashboard
+- ✅ Pressure monitoring
+- ✅ Temperature monitoring
+- ✅ Altitude monitoring
+
+---
+
+# 🛠 Hardware Components
+
+| Component | Purpose |
+|-----------|---------|
+| ESP32 DevKit V1 | Main controller |
+| ESP32-CAM | Live video streaming |
+| MQ-5 Gas Sensor | Gas detection |
+| BMP280 | Temperature, Pressure & Altitude |
+| Active Buzzer | Local alarm |
+| USB-to-TTL | ESP32-CAM programming |
+
+---
+
+# 💻 Software Used
+
+- MicroPython
+- Arduino IDE
+- Thonny
+- Node-RED
+- InfluxDB
+- Grafana
+- Telegram Bot API
+
+---
+
+# ⚙ System Architecture
+
+```
+                 MQ-5
+                   |
+               BMP280
+                   |
+             ESP32 Sensor
+             /          \
+        Buzzer      Telegram
+              \      /
+              Node-RED
+                   |
+              InfluxDB
+                   |
+              Grafana
+                   |
+            Live Dashboard
+
+ESP32-CAM
+     |
+Live Video Web Server
+```
+
+---
+
+# 📊 Sensor Information
+
+## MQ-5 Gas Sensor
+
+Detects combustible gases.
+
+The ESP32 calculates the moving average of the last five readings before classification.
+
+### Risk Levels
+
+| Gas Average | Status |
+|-------------|--------|
+| < 2100 | SAFE |
+| 2100 - 2599 | WARNING |
+| ≥ 2600 | DANGER |
+
+---
+
+## BMP280
+
+Measures:
+
+- Temperature (°C)
+- Pressure (hPa)
+- Altitude (m)
+
+---
+
+# 🔄 System Workflow
+
+1. Read MQ-5 gas sensor.
+2. Read BMP280.
+3. Calculate moving average.
+4. Classify gas level.
+5. Activate buzzer if DANGER.
+6. Send Telegram notification.
+7. Send data to Node-RED.
+8. Store data in InfluxDB.
+9. Grafana updates automatically.
+10. ESP32-CAM continuously streams live video.
+
+---
+
+# 📱 Telegram Notification
+
+When the gas reaches the DANGER threshold, Telegram sends a notification containing:
+
+- Gas Average
+- Risk Level
+- Temperature
+- Pressure
+- Altitude
+- Live Camera Link
+- Grafana Dashboard Link
+
+Example:
+
+```
+🚨 GAS DANGER DETECTED
+
+Gas Average: 2755
+
+Status: DANGER
+
+Temperature: 25.4°C
+
+Pressure: 1005.3 hPa
+
+Altitude: 32.5 m
+
+Live Camera:
+http://ESP32-CAM-IP
+
+Grafana Dashboard:
+http://Grafana-IP:3000
+```
+
+---
+
+# 📈 Grafana Dashboard
+
+The dashboard displays:
+
+- Gas Average
+- Gas Risk Level
+- Temperature
+- Pressure
+- Altitude
+- Live Camera
+
+---
+
+# 📂 Project Structure
+
+```
+Project/
+│
+├── main.py
+├── bmp280.py
+├── README.md
+├── Node-RED Flow.json
+├── Presentation.pptx
+└── Images/
+```
+
+---
+
+# ▶ Running the Project
+
+### 1. Upload MicroPython files
+
+Copy to ESP32:
+
+- main.py
+- bmp280.py
+
+---
+
+### 2. Start Node-RED
+
+```
+http://localhost:1880
+```
+
+Deploy the flow.
+
+---
+
+### 3. Start InfluxDB
+
+Ensure the database is running.
+
+---
+
+### 4. Open Grafana
+
+```
+http://localhost:3000
+```
+
+Open the dashboard.
+
+---
+
+### 5. Start ESP32-CAM
+
+Open the live stream.
+
+Example:
+
+```
+http://ESP32-CAM-IP/
+```
+
+---
+
+### 6. Test
+
+Introduce gas near the MQ-5 sensor.
+
+Expected behavior:
+
+- Dashboard changes from SAFE to DANGER.
+- Buzzer activates.
+- Telegram notification is sent.
+- Live camera is available.
+
+---
+
+# 📸 Demonstration
+
+During testing:
+
+✔ Dashboard updates in real time
+
+✔ Telegram alert received
+
+✔ Live camera accessible
+
+✔ Buzzer activated
+
+✔ Sensor readings stored in InfluxDB
+
+---
+
+# 👨‍💻 Team Members
+
+- SOM Kongvisal
+- SAM Savi
+- HONG Sivhuy
+
+---
+
+# 📚 Course
+
+ICT360 – Introduction to Internet of Things
+
+American University of Phnom Penh
